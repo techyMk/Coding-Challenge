@@ -1,0 +1,25 @@
+// Problem Link: https://leetcode.com/problems/rotate-array/
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        if(k==0) {
+            return;
+        }
+        reverseNum(nums,0,n-1);
+        reverseNum(nums,0,k-1);
+        reverseNum(nums,k,n-1);
+    }
+
+    void reverseNum(vector<int>& nums, int left, int right) {
+        while(left<right) {
+            int temp=nums[left];
+            nums[left]=nums[right];
+            nums[right]=temp;
+            left++;
+            right--;
+        }
+    }
+};
