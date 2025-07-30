@@ -1,0 +1,20 @@
+//Problem Link: https://leetcode.com/problems/missing-number/
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size(), 
+        expectedSum=(n*(n+1)/2),
+        actualSum=0;
+        bool zero=false;
+        for(auto const &num:nums) {
+            actualSum+=num;
+            if(num==0)
+                zero=true;
+        }
+        if(zero)
+            return expectedSum-actualSum;
+        else
+            return 0;
+    }
+};
