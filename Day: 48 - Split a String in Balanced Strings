@@ -1,0 +1,20 @@
+//Problem Link: https://leetcode.com/problems/split-a-string-in-balanced-strings/
+
+class Solution {
+public:
+    int balancedStringSplit(string s) {
+        int leftChar=0, rightChar=0, ans=0;
+        for(auto x:s) {
+            if(x=='R')
+                rightChar++;
+            else
+                leftChar++;
+            if(leftChar==rightChar) {
+                ans++;
+                leftChar=0;
+                rightChar=0;
+            }
+        }
+        return ans;
+    }
+};
