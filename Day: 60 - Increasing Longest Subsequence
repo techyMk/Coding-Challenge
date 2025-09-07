@@ -1,0 +1,27 @@
+//Problem Link: https://leetcode.com/problems/longest-increasing-subsequence/
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> sub;
+        sub.push_back(nums[0]);
+        for (int i=1;i<n;i++) {
+            if(nums[i]>sub.back()) {
+                sub.push_back(nums[i]);
+            } else {
+                int l=0, h=sub.size()- 1;
+                while (l<=h) {
+                    int mid=l+(h-l)/2;
+                    if(sub[mid]<nums[i]) {
+                        l=mid+1;
+                    }else {
+                        h=mid-1;
+                    }
+                }
+                sub[l]=nums[i];
+            }
+        }
+        return sub.size();
+    }
+};
