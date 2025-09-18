@@ -1,0 +1,19 @@
+//Problem Link: https://leetcode.com/problems/gas-station/
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int start=0,fuel=0,totalgas=0,totalcar=0;    
+        for (int i=0;i<gas.size();i++)
+        {
+            fuel+=gas[i]-cost[i]; 
+            totalgas+=gas[i];
+            totalcar+=cost[i];
+            if (fuel<0) {          
+                start=i+1;         
+                fuel=0;              
+            }
+        }
+        return (totalgas<totalcar) ? -1 : start;
+    }
+};
