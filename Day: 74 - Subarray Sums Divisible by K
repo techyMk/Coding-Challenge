@@ -1,0 +1,19 @@
+//Problem Link: https://leetcode.com/problems/subarray-sums-divisible-by-k
+
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        unordered_map<int, int> freq;
+        freq[0]=1;  
+        int prefix=0,count=0;
+        for (int num:nums) {
+            prefix+=num;
+            int mod=((prefix%k)+k)%k;
+            if (freq.count(mod)) {
+                count+=freq[mod];  
+            }
+            freq[mod]++; 
+        }
+        return count;
+    }
+};
