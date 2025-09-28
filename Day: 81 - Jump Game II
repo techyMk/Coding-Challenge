@@ -1,0 +1,16 @@
+//Problem Link: https://leetcode.com/problems/jump-game-ii/
+
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n=nums.size(), jumps=0, currReach=0, farReach=0;
+        for(int i=0;i<n-1;i++) {
+            farReach=max(farReach, i+nums[i]);
+            if(i==currReach) {
+                jumps++;
+                currReach=farReach;
+            }
+        }
+        return jumps;
+    }
+};
