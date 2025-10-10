@@ -1,0 +1,21 @@
+//Problem Link: https://leetcode.com/problems/find-all-anagrams-in-a-string/
+
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+     vector<int> result;
+        if(s.size()<p.size())
+            return result;
+        vector<int> countP(26, 0),countS(26, 0);
+        for(char c:p) countP[c-'a']++;
+        int window=p.size();
+        for(int i=0;i<s.size();i++) {
+            countS[s[i] - 'a']++; 
+            if(i>=window)
+                countS[s[i-window]-'a']--;
+            if(countS == countP)
+                result.push_back(i-window+1);
+        }
+        return result;   
+    }
+};
