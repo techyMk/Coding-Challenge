@@ -1,0 +1,44 @@
+//Problem Link: https://leetcode.com/problems/solve-the-equation/
+
+class Solution {
+public:
+    pair<int, int> evaluate(string s) {
+        int coeff=0, constTerm=0, sign=1, i=0, n=s.size();
+        while(i<n) {
+            if(s[i]=='+') {
+                sign = 1; i++; 
+            }
+            else if(s[i] == '-') {
+                sign = -1; i++;
+            }
+            int num=0;
+            bool hasNum=false;
+            while(i<n&&isdigit(s[i])) {
+                num=num*10+(s[i]-'0');
+                hasNum=true;
+                i++;
+            }
+            if(i<n&&s[i]=='x') {
+                if(!hasNum)
+                    num = 1; 
+                coeff+=sign*num;
+                i++;
+            } else {
+                constTerm+=sign*num;
+            }
+        }
+        return {coeff, constTerm};
+    }
+    string solveEquation(string equation) {
+        int idx=equation.find('=');
+        string left=equation.substr(0, idx);
+        string right=equation.substr(idx+1);
+        auto[leftCoeff, leftConst]=evaluate(left);
+        auto[rightCoeff, rightConst]=evaluate(right);
+        int coeff=leftCoeff-rightCoeff;
+        int constant=rightConst-leftConst;
+        if(coeff==0&&constant==0) return "Infinite solutions";
+        if(coeff==0) return "No solution";
+        return "x="+to_string(constant/coeff);
+    }
+};
