@@ -1,0 +1,21 @@
+//Problem Link: https://leetcode.com/problems/magical-string/
+
+class Solution {
+public:
+    int magicalString(int n) {
+        if(n<4) 
+            return 1;
+        vector<int> arr(n+2 ,0);
+        arr[2]=2;
+        int res=1;
+        for(int idx=2, curr=1, pos=3; pos<n; ++idx){
+            for(int j=0; j<arr[idx]&&pos<n; ++j,++pos){
+                arr[pos]=curr;
+                if(curr==1)
+                    ++res;
+            }
+            curr^=3;
+        }
+        return res;
+    }
+};
