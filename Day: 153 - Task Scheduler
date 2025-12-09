@@ -1,0 +1,17 @@
+//Problem Link: https://leetcode.com/problems/task-scheduler/
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int> freq(26,0);
+        for(char c:tasks) 
+            freq[c-'A']++;
+        int fmax=*max_element(freq.begin(),freq.end());
+        int countMax=count(freq.begin(),freq.end(),fmax);
+        int partCount=fmax-1;
+        int emptySlots=partCount*(n-(countMax-1));
+        int remainingTasks=tasks.size()-fmax*countMax;
+        int idles=max(0,emptySlots-remainingTasks);
+        return tasks.size()+idles;
+    }
+};
