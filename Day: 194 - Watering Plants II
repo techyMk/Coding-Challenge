@@ -1,0 +1,30 @@
+//Problem Link: https://leetcode.com/problems/watering-plants-ii/
+
+class Solution {
+public:
+    int minimumRefill(vector<int>& plants, int capacityA, int capacityB) {
+        int l=0,r=plants.size()-1;
+        int waterA=capacityA,waterB=capacityB;
+        int refills=0;
+        while(l<r) {
+            if (waterA<plants[l]) {
+                refills++;
+                waterA=capacityA;
+            }
+            waterA-=plants[l];
+            l++;
+            if(waterB<plants[r]) {
+                refills++;
+                waterB=capacityB;
+            }
+            waterB-=plants[r];
+            r--;
+        }
+        if(l==r) {
+            if (max(waterA, waterB)<plants[l]) {
+                refills++;
+            }
+        }
+        return refills;
+    }
+};
