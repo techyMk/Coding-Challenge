@@ -1,0 +1,32 @@
+//Problem Link: https://leetcode.com/problems/random-flip-matrix/
+
+class Solution {
+public:
+    int rows, cols;
+    unordered_map<int, int> mp;
+    int total;
+    Solution(int m,int n) {
+        rows=m;
+        cols=n;
+        total=m*n;
+    }
+    vector<int> flip() {
+        int x=rand()%total;
+        total--;
+        int idx=mp.count(x)?mp[x]:x;
+        mp[x]=mp.count(total)?mp[total]:total;
+        return {idx/cols,idx%cols};
+    }
+    void reset() {
+        mp.clear();
+        total=rows*cols;
+    }
+};
+
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(m, n);
+ * vector<int> param_1 = obj->flip();
+ * obj->reset();
+ */
