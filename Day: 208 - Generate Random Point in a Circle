@@ -1,0 +1,25 @@
+//Problem Link: https://leetcode.com/problems/generate-random-point-in-a-circle/
+
+class Solution {
+public:
+    double radius, x_center, y_center;
+    Solution(double r, double x, double y) {
+        radius=r;
+        x_center=x;
+        y_center=y;
+    }
+    vector<double> randPoint() {
+        double theta=((double) rand()/RAND_MAX)*2*M_PI;
+        double dist=sqrt((double) rand()/RAND_MAX)*radius;
+        double x=x_center+dist*cos(theta);
+        double y=y_center+dist*sin(theta);
+        return {x, y};
+    }
+};
+
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(radius, x_center, y_center);
+ * vector<double> param_1 = obj->randPoint();
+ */
